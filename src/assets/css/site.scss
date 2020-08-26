@@ -1,0 +1,63 @@
+$default_blue1: #667eea;
+$default_blue2: #4c51bf;
+$default_whilte1: white;
+$default_scrollbar_color: #0e487c;
+$default_scrollbar_thumb_color: #0e487c;
+$default_fontSize: 1em;
+$default_fontSize1: 1.2rem;
+$default_fontSize2: 1.3rem;
+
+// ::-webkit-scrollbar {
+//   width: 5px;
+//   height: 5px;
+//   background-color: $default_scrollbar_color;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: $default_scrollbar_thumb_color;
+// }
+.subHeader {
+  font-size: $default_fontSize2;
+  font-weight: bolder;
+}
+
+.flex_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+
+  div {
+    text-align: center;
+    font-size: $default_fontSize2;
+    // padding: 10px 0;
+    // background-color: $default_whilte1;
+  }
+}
+
+.breadcrumb_container {
+  margin: 8px 0;
+}
+
+.shadow {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.shadow_l {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.pagination {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.tableStatus {
+  width: 1rem;
+  height: 1rem;
+  background-color: green;
+  border-radius: 0.2rem;
+  &.removed {
+    background-color: red;
+  }
+}
