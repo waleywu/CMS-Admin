@@ -76,7 +76,13 @@
       show-close
       :close-on-click-modal="false"
     >
-      <component :is="com" :id="id" :visible.sync="visible"></component>
+      <component
+        :is="com"
+        :id="id"
+        :visible.sync="visible"
+        :type="type"
+        @refresh="this.refreshUsers"
+      ></component>
     </el-dialog>
     <!---    修改密码对话框 结束--------------->
   </div>
@@ -120,6 +126,7 @@ export default {
     async edit(id) {
       this.com = () => import("../user/profile");
       this.id = id;
+      this.type = "update";
       this.visible = true;
     },
 
@@ -162,7 +169,7 @@ export default {
       }
     },
     dateFormat(row, col, cellValue) {
-      return moment(cellValue).format("YYYY-MM-DD HH:mm");
+      if (cellValue) return moment(cellValue).format("YYYY-MM-DD HH:mm");
     },
     handleClose(done) {
       if (this.isEdit) {
@@ -178,9 +185,8 @@ export default {
     },
     createUser() {
       this.com = () => import("../user/profile");
-      this.com.type = "create";
       this.visible = true;
-      this.$router.push({ name: "createUser" });
+      this.type = "create";
     },
   },
 };

@@ -56,6 +56,7 @@ export default {
                 .post("/api/user/handle/checkLoginName", {
                   loginName: value,
                   id: this.id,
+                  type: this.type,
                 })
                 .then((payload) => {
                   if (payload.result !== 0) callback(new Error());
@@ -76,8 +77,7 @@ export default {
     ...mapState(["user"]),
   },
   created() {
-    console.log(this.type);
-    this.getUserProfile();
+    if (this.type === "update") this.getUserProfile();
   },
   methods: {
     async getUserProfile() {
@@ -102,6 +102,7 @@ export default {
           await this.saveHandler();
         }
       });
+      this.$emit("update:type", "");
     },
 
     async saveHandler() {
@@ -118,7 +119,7 @@ export default {
         if (payload.error === null) {
           this.setStatus(false);
           this.$message({
-            message: "保存成功",
+            message: payload.msg,
             type: "success",
           });
           //如果更新的是当前操作人员的信息，则同步用户
@@ -126,6 +127,8 @@ export default {
             this.$store.state.user.name = payload.result.name;
           //关闭对话框
           this.$emit("update:visible", false);
+          //调用刷新
+          this.$emit("refresh");
         } else {
           this.$message.error(payload.msg);
         }
